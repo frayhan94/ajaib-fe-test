@@ -51,7 +51,6 @@ function Home() {
   const [gender, setGender] = useState(null);
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState(null);
-  const [defaultValueGender, setDefaultValueGender] = useState('all');
   const queryDebounce = useDebounce(query, 500);
   const isFirstRender = useFirstRender();
 
@@ -113,9 +112,7 @@ function Home() {
 
   const clearFilter = useCallback(() => {
     if (!isNull(gender) || !isNull(query)) {
-      setGender(null);
-      setQuery(null);
-      setDefaultValueGender('all');
+      window.location.reload();
     }
   }, [gender, query]);
 
@@ -175,7 +172,7 @@ function Home() {
             <Col>
               <Select
                 disabled={homeState?.user?.loading}
-                defaultValue={defaultValueGender}
+                defaultValue="all"
                 style={{ width: 120 }}
                 onChange={handleChange}
               >
@@ -190,7 +187,8 @@ function Home() {
               <Button
                 disabled={homeState?.user?.loading}
                 onClick={clearFilter}
-              >Clear
+              >
+                Reset Filter
               </Button>
             </Col>
           </Row>
