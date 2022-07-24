@@ -157,57 +157,55 @@ function Home() {
   }
   return (
     <Layout header={false} footer>
-      {homeState?.user?.data?.results && homeState?.user?.data?.results.length > 0 && (
-        <div className="px-3.5 pt-4">
-          <Row className="pb-4" gutter={16}>
-            <Col>
-              <Input
-                disabled={homeState?.user?.loading}
-                value={query}
-                onChange={(e) => {
-                  setQuery(e.target.value);
-                }}
-              />
-            </Col>
-            <Col>
-              <Select
-                disabled={homeState?.user?.loading}
-                defaultValue="all"
-                style={{ width: 120 }}
-                onChange={handleChange}
-              >
-                {optionValue.map((value) => (
-                  <Option key={value.value} value={value.value}>
-                    {value.title}
-                  </Option>
-                ))}
-              </Select>
-            </Col>
-            <Col>
-              <Button
-                disabled={homeState?.user?.loading}
-                onClick={clearFilter}
-              >
-                Reset Filter
-              </Button>
-            </Col>
-          </Row>
-          <Table
-            pagination={{
-              current: page,
-              pageSize: DEFAULT_LIMIT,
-              hideOnSinglePage: true,
-              showSizeChanger: false,
-              // @todo pass the total value from api so we can know the last pagination
-              total: 100,
-            }}
-            loading={homeState?.user?.loading}
-            dataSource={homeState?.user?.data?.results}
-            columns={columns}
-            onChange={onChangePage}
-          />
-        </div>
-      )}
+      <div className="px-3.5 pt-4">
+        <Row className="pb-4" gutter={16}>
+          <Col>
+            <Input
+              disabled={homeState?.user?.loading}
+              value={query}
+              onChange={(e) => {
+                setQuery(e.target.value);
+              }}
+            />
+          </Col>
+          <Col>
+            <Select
+              disabled={homeState?.user?.loading}
+              defaultValue="all"
+              style={{ width: 120 }}
+              onChange={handleChange}
+            >
+              {optionValue.map((value) => (
+                <Option key={value.value} value={value.value}>
+                  {value.title}
+                </Option>
+              ))}
+            </Select>
+          </Col>
+          <Col>
+            <Button
+              disabled={homeState?.user?.loading}
+              onClick={clearFilter}
+            >
+              Reset Filter
+            </Button>
+          </Col>
+        </Row>
+        <Table
+          pagination={{
+            current: page,
+            pageSize: DEFAULT_LIMIT,
+            hideOnSinglePage: true,
+            showSizeChanger: false,
+            // @todo pass the total value from api so we can know the last pagination
+            total: 100,
+          }}
+          loading={homeState?.user?.loading}
+          dataSource={homeState?.user?.data?.results}
+          columns={columns}
+          onChange={onChangePage}
+        />
+      </div>
     </Layout>
   );
 }
