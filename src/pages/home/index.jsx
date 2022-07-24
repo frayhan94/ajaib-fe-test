@@ -149,6 +149,15 @@ function Home() {
     }
   }, [queryDebounce]);
 
+  if (homeState?.user?.error) {
+    return (
+      <Layout header={false} footer>
+        <div className="flex h-screen text-lg justify-center font-body font-medium items-center">
+          Something error with our ends, Please reload your browser
+        </div>
+      </Layout>
+    );
+  }
   return (
     <Layout header={false} footer>
       {homeState?.user?.data?.results && homeState?.user?.data?.results.length > 0 && (
@@ -171,7 +180,9 @@ function Home() {
                 onChange={handleChange}
               >
                 {optionValue.map((value) => (
-                  <Option value={value.value}>{value.title}</Option>
+                  <Option key={value.value} value={value.value}>
+                    {value.title}
+                  </Option>
                 ))}
               </Select>
             </Col>
